@@ -8,6 +8,12 @@ project(hackathon-20170321)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED)
+#find_package( catkin REQUIRED COMPONENTS roscpp message_generation )
+find_package(catkin REQUIRED COMPONENTS
+  rospy
+  std_msgs
+  message_generation
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -34,7 +40,7 @@ find_package(catkin REQUIRED)
 ##     * add a run_depend tag for "message_runtime"
 ## * In this file (CMakeLists.txt):
 ##   * add "message_generation" and every package in MSG_DEP_SET to
-##     find_package(catkin REQUIRED COMPONENTS ...)
+##     find_package(catkin REQUIRED COMPONENTShttp://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html ...)
 ##   * add "message_runtime" and every package in MSG_DEP_SET to
 ##     catkin_package(CATKIN_DEPENDS ...)
 ##   * uncomment the add_*_files sections below as needed
@@ -48,13 +54,17 @@ find_package(catkin REQUIRED)
 #   Message1.msg
 #   Message2.msg
 # )
+add_message_files( FILES my_message.msg )
 
 ## Generate services in the 'srv' folder
 # add_service_files(
 #   FILES
-#   Service1.srv
-#   Service2.srv
+#    beginner_tutorials.srv
 # )
+add_service_files(
+  FILES
+  get_command.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -68,6 +78,7 @@ find_package(catkin REQUIRED)
 #   DEPENDENCIES
 #   std_msgs  # Or other packages containing msgs
 # )
+generate_messages( DEPENDENCIES std_msgs )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
